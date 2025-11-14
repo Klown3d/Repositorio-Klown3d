@@ -129,7 +129,7 @@ const Index = () => {
       "║                    CONTACTO                                   ║",
       "╚═══════════════════════════════════════════════════════════════╝",
       "",
-      "Email:    <a href='mailto:CarpignanoGeronimo@gmail.com' class='text-primary hover:underline'>geronimo@klown3d.dev</a>",
+      "Email:    <a href='mailto:CarpignanoGeronimo@gmail.com' class='text-primary hover:underline'>CarpignanoGeronimo@gmail.com</a>",
       "GitHub:   <a href='https://github.com/Klown3d' target='_blank' class='text-primary hover:underline'>github.com/klown3d</a>",
       "LinkedIn: <a href='https://www.linkedin.com/in/geronimo-carpignano-70597432b' target='_blank' class='text-primary hover:underline'>linkedin.com/in/geronimo-carpignano</a>",
       "Instagram: <a href='https://www.instagram.com/geronimo.carpig' target='_blank' class='text-primary hover:underline'>@geronimocarpignano</a>",
