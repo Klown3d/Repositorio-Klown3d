@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import TerminalEntry from "@/components/TerminalEntry";
-import AudioVisualizer from "@/components/AudioVisualizer";
+
 
 interface CommandHistory {
   command: string;
@@ -23,152 +23,137 @@ const Index = () => {
 
   const asciiArt = {
     logo: [
-      "  ██╗  ██╗██╗      ██████╗ ██╗    ██╗███╗   ██╗██████╗ ██████╗ ",
-      "  ██║ ██╔╝██║     ██╔═══██╗██║    ██║████╗  ██║╚════██╗██╔══██╗",
-      "  █████╔╝ ██║     ██║   ██║██║ █╗ ██║██╔██╗ ██║ █████╔╝██║  ██║",
-      "  ██╔═██╗ ██║     ██║   ██║██║███╗██║██║╚██╗██║ ╚═══██╗██║  ██║",
-      "  ██║  ██╗███████╗╚██████╔╝╚███╔███╔╝██║ ╚████║██████╔╝██████╔╝",
-      "  ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚═════╝ ╚═════╝ ",
+      " ██╗  ██╗██╗      ██████╗ ██╗    ██╗███╗   ██╗██████╗ ██████╗ ",
+      " ██║ ██╔╝██║     ██╔═══██╗██║    ██║████╗  ██║╚════██╗██╔══██╗",
+      " █████╔╝ ██║     ██║   ██║██║ █╗ ██║██╔██╗ ██║ █████╔╝██║  ██║",
+      " ██╔═██╗ ██║     ██║   ██║██║███╗██║██║╚██╗██║ ╚═══██╗██║  ██║",
+      " ██║  ██╗███████╗╚██████╔╝╚███╔███╔╝██║ ╚████║██████╔╝██████╔╝",
+      " ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚══╝╚══╝ ╚═╝  ╚═══╝╚═════╝ ╚═════╝ ",
     ],
     welcome: [
       "╔════════════════════════════════════════════════════════════════╗",
-      "║           KLOWN3D BACKEND DEVELOPMENT TERMINAL v3.14          ║",
-      "║                  Geronimo Carpignano Systems                  ║",
+      "║                TERMINAL KLOWN3D v3.14                         ║",
+      "║                  Geronimo Carpignano                          ║",
       "╚════════════════════════════════════════════════════════════════╝",
     ]
   };
 
   const commands: Record<string, () => string[]> = {
     help: () => [
-      "Available commands:",
+      "Comandos disponibles:",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "  help        - Display this help message",
-      "  about       - Information about Klown3d",
-      "  skills      - List backend technologies and expertise",
-      "  projects    - View portfolio projects",
-      "  contact     - Get contact information",
-      "  clear       - Clear terminal screen",
-      "  whoami      - System information",
-      "  exit        - Lock terminal (logout)",
+      "  help        - Muestra este mensaje",
+      "  about       - Información sobre mí",
+      "  skills      - Tecnologías que manejo",
+      "  projects    - Mis proyectos",
+      "  contact     - Cómo contactarme",
+      "  clear       - Limpiar pantalla",
+      "  whoami      - Información del sistema",
+      "  exit        - Cerrar sesión",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
       "",
     ],
     about: () => [
       "╔═══════════════════════════════════════════════════════════════╗",
-      "║                    ABOUT KLOWN3D                              ║",
+      "║                         SOBRE MÍ                             ║",
       "╚═══════════════════════════════════════════════════════════════╝",
       "",
-      "Name: Geronimo Carpignano",
+      "Nombre: Geronimo Carpignano",
       "Alias: Klown3d",
-      "Role: Backend Developer & System Architect",
+      "Rol: Backend Developer",
       "",
-      "Specialization:",
-      "  → Building scalable backend architectures",
-      "  → RESTful & GraphQL API development",
-      "  → Microservices & distributed systems",
-      "  → Database design & optimization",
-      "  → DevOps & containerization",
+      "Me especializo en:",
+      "  → Backends escalables",
+      "  → Bases de datos",
+      "  → Inteligencia Artificial",
       "",
-      "Philosophy:",
-      "  'Code is chaos. Architecture brings order.'",
+      "Filosofía:",
+      "  'Si funciona, dejalo'",
       "",
-      "Status: AVAILABLE FOR PROJECTS",
+      "Estado: In Coding",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
       "",
     ],
     skills: () => [
       "╔═══════════════════════════════════════════════════════════════╗",
-      "║                  BACKEND TECH STACK                           ║",
+      "║                    TECNOLOGÍAS                               ║",
       "╚═══════════════════════════════════════════════════════════════╝",
       "",
-      "[CORE TECHNOLOGIES]",
+      "[TECNOLOGÍAS PRINCIPALES]",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "  ▸ Node.js            [████████████████████] 95% - Expert",
-      "  ▸ Express.js         [████████████████████] 95% - Expert", 
-      "  ▸ PostgreSQL         [██████████████████  ] 90% - Advanced",
-      "  ▸ MongoDB            [████████████████    ] 80% - Advanced",
-      "  ▸ Redis              [██████████████████  ] 90% - Advanced",
-      "",
-      "[API DEVELOPMENT]",
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "  ▸ REST APIs          [████████████████████] 95% - Expert",
-      "  ▸ GraphQL            [████████████████    ] 80% - Advanced",
-      "  ▸ WebSockets         [██████████████████  ] 90% - Advanced",
-      "  ▸ gRPC               [██████████████      ] 70% - Intermediate",
-      "",
-      "[DEVOPS & TOOLS]",
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "  ▸ Docker             [████████████████████] 95% - Expert",
-      "  ▸ Kubernetes         [████████████████    ] 80% - Advanced",
-      "  ▸ Nginx              [██████████████████  ] 90% - Advanced",
-      "  ▸ CI/CD              [████████████████    ] 85% - Advanced",
+      "  ▸ Node.js            [██████████████      ] 65%",
+      "  ▸ Tensorflow         [███████████████     ] 70%",
+      "  ▸ Supabase           [█████████████████   ] 80%",
+      "  ▸ Redis              [██████████████████  ] 90%",
       "",
     ],
     projects: () => [
       "╔═══════════════════════════════════════════════════════════════╗",
-      "║                   PORTFOLIO PROJECTS                          ║",
+      "║                      PROYECTOS                               ║",
       "╚═══════════════════════════════════════════════════════════════╝",
       "",
-      "[1] DISTRIBUTED API GATEWAY",
+      "[1] KIOSCO VIRTUAL",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Description: High-performance API gateway handling 10k+ req/s",
-      "            with intelligent load balancing and Redis caching.",
-      "Tech Stack: Node.js, Redis, Docker, Nginx",
-      "Status:     [LIVE] Production",
+      "Descripción: Sistema de pedidos para kiosco con gestión",
+      "             de inventario y reportes en tiempo real.",
+      "Tech Stack: Node.js, SQLite, JavaScript",
+      "Estado:     [Finalizado]",
+      "Link:       <a href='https://github.com/mercedesduarte/superluna' target='_blank' class='text-primary hover:underline'>Visitar Proyecto</a>",
       "",
-      "[2] REAL-TIME DATA PIPELINE",
+      "[2] E-COMMERCE",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Description: Event-driven architecture processing streaming data",
-      "            with sub-second latency using Kafka.",
-      "Tech Stack: Node.js, Kafka, PostgreSQL, WebSockets",
-      "Status:     [ACTIVE] Development",
+      "Descripción: Plataforma de e-commerce completa con carrito,",
+      "             pasarela de pagos y panel administrativo.",
+      "Tech Stack: Node.js, React, JWT, Django",
+      "Estado:     [Finalizado]",
+      "Link:       <a href='https://github.com/Klown3d/ViajaYa' target='_blank' class='text-primary hover:underline'>Visitar Proyecto</a>",
       "",
-      "[3] MICROSERVICES ARCHITECTURE",
+      "[3] SISTEMA SUPERMERCADO",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Description: Scalable microservices ecosystem with service mesh",
-      "            and auto-scaling capabilities.",
-      "Tech Stack: Node.js, Kubernetes, gRPC, MongoDB",
-      "Status:     [DEPLOYED] Production",
+      "Descripción: Backend para gestión de supermercado con",
+      "             control de stock y ventas.",
+      "Tech Stack: Node.js, React, Django, JWT",
+      "Estado:     [Finalizado]",
+      "Link:       <a href='https://github.com/Klown3d/TrabajoGianChino' target='_blank' class='text-primary hover:underline'>Visitar Proyecto</a>",
       "",
-      "[4] AUTHENTICATION SERVICE",
+      "[4] PLATAFORMA COLEGIO",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Description: Secure JWT-based auth system with OAuth2, 2FA,",
-      "            and comprehensive session management.",
-      "Tech Stack: Express, PostgreSQL, Redis, JWT",
-      "Status:     [LIVE] Production",
+      "Descripción: Landing page escuela tecnica 7,",
+      "Tech Stack: Html, JavaScript",
+      "Estado:     [Finalizado]",
+      "Link:       <a href='https://github.com/Klown3d/EscuelaPagina' target='_blank' class='text-primary hover:underline'>Visitar Proyecto</a>",
       "",
     ],
     contact: () => [
       "╔═══════════════════════════════════════════════════════════════╗",
-      "║                   CONTACT INFORMATION                         ║",
+      "║                    CONTACTO                                   ║",
       "╚═══════════════════════════════════════════════════════════════╝",
       "",
-      "Email:    geronimo@klown3d.dev",
-      "GitHub:   github.com/klown3d",
-      "LinkedIn: linkedin.com/in/geronimo-carpignano",
+      "Email:    <a href='mailto:CarpignanoGeronimo@gmail.com' class='text-primary hover:underline'>geronimo@klown3d.dev</a>",
+      "GitHub:   <a href='https://github.com/Klown3d' target='_blank' class='text-primary hover:underline'>github.com/klown3d</a>",
+      "LinkedIn: <a href='https://www.linkedin.com/in/geronimo-carpignano-70597432b' target='_blank' class='text-primary hover:underline'>linkedin.com/in/geronimo-carpignano</a>",
+      "Instagram: <a href='https://www.instagram.com/geronimo.carpig' target='_blank' class='text-primary hover:underline'>@geronimocarpignano</a>",
       "",
-      "Availability: OPEN TO OPPORTUNITIES",
+      "Disponibilidad: Esperando por vos",
       "",
-      "Response time: Usually within 24 hours",
+      "Tiempo de respuesta: A vos? en 5 minutos",
       "",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Feel free to reach out for:",
-      "  • Backend development projects",
-      "  • System architecture consulting",
-      "  • Microservices design",
-      "  • API development",
-      "  • Technical collaboration",
+      "Puedes contactarme para:",
+      "  • Desarrollo backend",
+      "  • Arquitectura de sistemas",
+      "  • Colaboraciones técnicas",
       "",
     ],
     whoami: () => [
-      "System Information:",
+      "Información del sistema:",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "User:          klown3d",
-      "System:        KLOWN3D Terminal v3.14",
-      "Location:      The Backend Matrix",
-      "Access Level:  [FULL_ACCESS]",
-      "Session:       Active",
-      "Uptime:        ∞ (Always coding)",
+      "Usuario:          klown3d",
+      "Sistema:          Terminal KLOWN3D v3.14",
+      "Ubicación:        The BlaCKwAlL",
+      "Nivel de acceso:  [ACCESO_TOTAL]",
+      "Sesión:           Activa",
+      "Uptime:           ∞",
       "",
     ],
     clear: () => {
@@ -177,7 +162,7 @@ const Index = () => {
     },
     exit: () => {
       setHasAccess(false);
-      return ["Logging out...", "Terminal locked."];
+      return ["Cerrando sesión...", "Terminal bloqueado."];
     }
   };
 
@@ -188,10 +173,10 @@ const Index = () => {
         "",
         ...asciiArt.welcome,
         "",
-        "System initialized successfully.",
-        `Session started at ${getTimestamp()}`,
+        "Sistema inicializado correctamente.",
+        `Sesión iniciada a las ${getTimestamp()}`,
         "",
-        "Type 'help' for available commands.",
+        "Escribe 'help' para ver los comandos disponibles.",
         "",
       ];
       
@@ -225,8 +210,8 @@ const Index = () => {
       }
     } else {
       output = [
-        `'${cmd}' is not recognized as an internal or external command.`,
-        "Type 'help' for a list of available commands.",
+        `'${cmd}' no se reconoce como un comando interno o externo.`,
+        "Escribe 'help' para ver la lista de comandos disponibles.",
         ""
       ];
       setHistory(prev => [...prev, { command: cmd, output, timestamp }]);
@@ -247,16 +232,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-mono p-4 relative overflow-hidden">
-      <AudioVisualizer />
+
       
-      {/* Terminal grid background */}
       <div className="fixed inset-0 terminal-grid opacity-30 pointer-events-none" />
       
-      {/* Scan line effect */}
       <div className="scan-line fixed inset-0 pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Terminal header */}
         <div className="mb-4 pb-2 border-b-2 border-primary">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -268,12 +250,11 @@ const Index = () => {
               </span>
             </div>
             <div className="text-xs text-muted-foreground">
-              Session: {new Date().toLocaleDateString()} | Status: CONNECTED
+              Sesión: {new Date().toLocaleDateString()} | Estado: CONECTADO
             </div>
           </div>
         </div>
 
-        {/* Terminal output */}
         <div className="space-y-2 mb-4">
           {history.map((entry, idx) => (
             <div key={idx} className="terminal-output">
@@ -286,24 +267,22 @@ const Index = () => {
                 <div 
                   key={lineIdx} 
                   className={`${
-                    line.includes("ERROR") || line.includes("DENIED") 
+                    line.includes("ERROR") || line.includes("DENEGADO") 
                       ? "text-secondary" 
-                      : line.includes("SUCCESS") || line.includes("GRANTED") || line.includes("[LIVE]") || line.includes("[ACTIVE]")
+                      : line.includes("ÉXITO") || line.includes("PERMITIDO") || line.includes("[EN PRODUCCIÓN]") || line.includes("[EN DESARROLLO]") || line.includes("[Finalizado]")
                       ? "text-primary text-glow-green"
-                      : line.includes("WARNING")
+                      : line.includes("ADVERTENCIA")
                       ? "text-accent"
                       : "text-foreground"
                   }`}
-                >
-                  {line}
-                </div>
+                  dangerouslySetInnerHTML={{ __html: line }}
+                />
               ))}
             </div>
           ))}
           <div ref={terminalEndRef} />
         </div>
 
-        {/* Terminal input */}
         <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t-2 border-primary pt-4">
           <span className="text-primary text-glow-green">
             C:\KLOWN3D\PORTFOLIO&gt;
@@ -320,10 +299,9 @@ const Index = () => {
           <span className="text-primary terminal-cursor"></span>
         </form>
 
-        {/* Footer */}
         <div className="mt-8 pt-4 border-t border-primary/30 text-xs text-muted-foreground text-center">
-          <p>KLOWN3D TERMINAL v3.14 | © 2025 Geronimo Carpignano</p>
-          <p className="text-primary">All systems operational | Uptime: 99.99%</p>
+          <p>TERMINAL KLOWN3D v3.14</p>
+          <p className="text-primary">Todos los sistemas operativos | Uptime: 99.99%</p>
         </div>
       </div>
     </div>

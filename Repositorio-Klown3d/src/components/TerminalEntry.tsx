@@ -17,7 +17,7 @@ const TerminalEntry = ({ onAccess }: TerminalEntryProps) => {
   ]);
   const [attempts, setAttempts] = useState(0);
 
-  const passwords = ["klown3d", "backend", "chaos", "punk"];
+  const passwords = ["klown3d", "backend", "back", "cyber", "arte"];
   
   const commands: Record<string, () => void> = {
     help: () => {
@@ -33,10 +33,10 @@ const TerminalEntry = ({ onAccess }: TerminalEntryProps) => {
     },
     hint: () => {
       const hints = [
-        "The key is in the name...",
-        "What do you call someone who builds the chaos behind the scenes?",
-        "Think about what defines this portfolio...",
-        "It's not about security, it's about identity"
+        "Que es esto...",
+        "En que te hace pensar esto",
+        "Pensa en lo que describe este portafolio...",
+        "Lo mas importante es el nombre..."
       ];
       addToHistory([hints[Math.min(attempts, hints.length - 1)], ""]);
     },
@@ -75,7 +75,7 @@ const TerminalEntry = ({ onAccess }: TerminalEntryProps) => {
 
     if (trimmed === "") return;
 
-    // Check if it's an access command with password
+
     if (trimmed.startsWith("access ")) {
       const password = trimmed.substring(7).trim();
       if (passwords.includes(password)) {
@@ -98,7 +98,6 @@ const TerminalEntry = ({ onAccess }: TerminalEntryProps) => {
       return;
     }
 
-    // Direct password attempt (any of the valid passwords)
     if (passwords.includes(trimmed)) {
       addToHistory([
         "DIRECT ACCESS DETECTED",
@@ -110,7 +109,6 @@ const TerminalEntry = ({ onAccess }: TerminalEntryProps) => {
       return;
     }
 
-    // Execute command
     if (commands[trimmed]) {
       commands[trimmed]();
     } else {

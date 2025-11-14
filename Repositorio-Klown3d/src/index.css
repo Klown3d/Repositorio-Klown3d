@@ -2,51 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Terminal CMD color system */
     --background: 0 0% 0%;
     --foreground: 120 100% 75%;
-
     --card: 0 0% 5%;
     --card-foreground: 120 100% 75%;
-
     --popover: 0 0% 0%;
     --popover-foreground: 120 100% 75%;
-
-    /* Terminal green primary */
     --primary: 120 100% 50%;
     --primary-foreground: 0 0% 0%;
-
-    /* Terminal red for errors/highlights */
     --secondary: 0 100% 50%;
     --secondary-foreground: 0 0% 0%;
-
     --muted: 0 0% 15%;
     --muted-foreground: 120 100% 40%;
-
-    /* Terminal yellow for warnings */
     --accent: 60 100% 50%;
     --accent-foreground: 0 0% 0%;
-
     --destructive: 0 100% 50%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 120 100% 25%;
     --input: 0 0% 5%;
     --ring: 120 100% 50%;
-
     --radius: 0rem;
-
-    /* Terminal glow effects */
     --glow-green: 0 0 10px hsl(120 100% 50% / 0.8), 0 0 20px hsl(120 100% 50% / 0.5);
     --glow-red: 0 0 10px hsl(0 100% 50% / 0.8), 0 0 20px hsl(0 100% 50% / 0.5);
     --glow-yellow: 0 0 10px hsl(60 100% 50% / 0.8), 0 0 20px hsl(60 100% 50% / 0.5);
-
     --sidebar-background: 0 0% 0%;
     --sidebar-foreground: 120 100% 75%;
     --sidebar-primary: 120 100% 50%;
@@ -62,14 +42,11 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
     font-family: 'Share Tech Mono', monospace;
     overflow-x: hidden;
   }
-
-  /* Punk noise texture */
   body::before {
     content: "";
     position: fixed;
@@ -85,7 +62,6 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  /* Glitch animation */
   @keyframes glitch {
     0%, 100% {
       transform: translate(0);
@@ -143,6 +119,21 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+  }
+
   .glitch {
     animation: glitch 0.3s infinite;
   }
@@ -187,16 +178,6 @@ All colors MUST be HSL.
     animation: blink 1s infinite;
   }
 
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-  }
-
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
   .typing-effect {
     overflow: hidden;
     white-space: nowrap;
@@ -216,10 +197,5 @@ All colors MUST be HSL.
     height: 2px;
     background: linear-gradient(90deg, transparent, hsl(120 100% 50% / 0.3), transparent);
     animation: scan 4s linear infinite;
-  }
-
-  @keyframes scan {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100vh); }
   }
 }
